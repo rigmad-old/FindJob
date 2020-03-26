@@ -1,0 +1,42 @@
+﻿@model IQueryable<FindJob.Models.Vacancy>
+
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Date).Formatted("{0:M}");
+        columns.Add(model => model.Name);
+      //  columns.Add(model => model.Description);
+        columns.Add(model => model.Company);
+        columns.Add(model => model.Salary);
+        columns.Add(model => model.Experience.Name).Titled("Опыт");
+        columns.Add(model => model.Education.Name).Titled("Образование");
+        if (!User.IsInRole("jobseeker"))
+        {
+            columns.Add(model => model.Enabled).Titled("Активно").RenderedAs(model => model.Enabled == true ? "Да" : "Нет");
+        }
+        if (User.IsInRole("Employee"))
+        {
+            columns.Add(model => "<a class='btn btn-primary btn-xs' role='button' href=/Vacancy/Edit/" + model.Id
+            + ">Ред.</a> <a class='btn btn-primary btn-xs' role='button' href=/Vacancy/Details/" + model.Id + ">Подр.</a>"
+            + " <a class='btn btn-primary btn-xs' role='button' href=/Vacancy/Delete/" + model.Id + ">Удал.</a>"
+            )
+            .Encoded(false).Titled("Действия");
+        }
+        else {
+            columns.Add(model => "<a class='btn btn-primary btn-xs' role='button' href=/Vacancy/Details/" + model.Id + ">Подр.</a>").Encoded(false).Titled("Действия");
+
+        }
+
+    })
+    .Empty("Нет данных")
+    .Filterable()
+    .Sortable()
+    .Pageable()
+)
+
+@{
+    ViewBag.Title = "Index";
+}
+

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<FindJob.Models.Resume>
+
+@{
+    ViewBag.Title = "Список резюме";
+}
+
+<h2>Список резюме</h2>
+
+@if (User.IsInRole("Jobseeker"))
+{
+<p>
+    @Html.ActionLink("Добавить", "Create")
+</p>
+}
+
+@Html.Partial("PartialResumes", Model.AsQueryable())
+

@@ -1,0 +1,10 @@
+﻿@model IEnumerable<FindJob.Models.Resume>
+
+@{
+    ViewBag.Title = "Подходящие резюме";
+}
+
+  <h2>Подходящие резюме</h2>
+
+
+@Html.Partial("PartialResumes", Model.AsQueryable())

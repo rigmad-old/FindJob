@@ -1,0 +1,121 @@
+﻿@model FindJob.Models.Resume
+
+@{
+    ViewBag.Title = "Подробности";
+}
+
+<h2>Подробности</h2>
+
+<div>
+    <h4>Резюме</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Date)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Experience)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Experience.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Education)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Education.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Salary)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Enabled)
+        </dt>
+        <dd>
+            @if (Model.Enabled)
+            {
+                <text> Да</text>
+            }
+            else
+            {
+                <text> Нет</text>
+            }
+        </dd>
+        @if (!User.IsInRole("JobSeeker"))
+        {
+
+            <dt>
+                @Html.DisplayNameFor(model => model.User)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.LastName)
+                @Html.DisplayFor(model => model.User.FirstName)
+                @Html.DisplayFor(model => model.User.PatronymicName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.User.Email)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.User.Phone)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.Phone)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.User.BirthDay)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.User.BirthDay)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.User.PhotoData)
+            </dt>
+            <dd>
+                @if (Model.User.PhotoData == null)
+                {
+                    <div class="form-control-static">Нет фото</div>
+                }
+                else
+                {
+                    <div>
+                        <img class="img-thumbnail" width="150" height="150" src="@Url.Action("GetImage", "Resume", new { Model.User.Id })" />
+                    </div>
+                }
+            </dd>
+        }
+
+    </dl>
+</div>
+<p>
+    @if (User.IsInRole("JobSeeker"))
+    {
+        @Html.ActionLink("Редактировать", "Edit", new { id = Model.Id }) <text> | </text>
+    }
+
+    @Html.ActionLink("Подходящие вакансии", "SearchForResume", "Vacancy", new { id = Model.Id }, null) |
+    
+    @Html.ActionLink("Вернуться в список", "Index")
+</p>

@@ -1,0 +1,41 @@
+﻿@model IQueryable<FindJob.Models.Resume>
+
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Date).Formatted("{0:M}");
+        columns.Add(model => model.Name);
+        if (!User.IsInRole("jobseeker"))
+        {
+            columns.Add(model => model.User.FirstName + " " + model.User.LastName).Titled("Соискатель").Filterable(GridFilterType.Single);
+        }
+        columns.Add(model => model.Experience.Name).Titled("Опыт");
+        columns.Add(model => model.Education.Name).Titled("Образование");
+        columns.Add(model => model.Salary);
+        if (User.IsInRole("Admin"))
+            columns.Add(model => model.Enabled).Titled("Активно").RenderedAs(model => model.Enabled == true ? "Да" : "Нет");
+        if (User.IsInRole("Jobseeker"))
+        {
+            columns.Add(model => "<a class='btn btn-primary btn-xs' role='button' href=/Resume/Edit/" + model.Id
+            + ">Ред.</a> <a class='btn btn-primary btn-xs' role='button' href=/Resume/Details/" + model.Id + ">Подр.</a>"
+            + " <a class='btn btn-primary btn-xs' role='button' href=/Resume/Delete/" + model.Id + ">Удал.</a>"
+            )
+            .Encoded(false).Titled("Действия");
+        }
+        else {
+            columns.Add(model => "<a class='btn btn-primary btn-xs' role='button' href=/Resume/Details/" + model.Id + ">Подр.</a>").Encoded(false).Titled("Действия");
+
+        }
+
+    })
+    .Empty("Нет данных")
+    .Filterable()
+    .Sortable()
+    .Pageable()
+)
+
+@{
+    ViewBag.Title = "Index";
+}

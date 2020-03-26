@@ -1,0 +1,30 @@
+﻿@model IQueryable<FindJob.Models.User>
+
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.Id).Titled("№");
+        columns.Add(model => model.Email);
+        columns.Add(model => model.FirstName);
+        columns.Add(model => model.LastName);
+        columns.Add(model => model.PatronymicName);
+        columns.Add(model => model.Phone);
+        columns.Add(model => model.BirthDay.Date).Formatted("{0:dd MMM yyyy}");
+        columns.Add(model => "<a class='btn btn-primary btn-xs' role='button' href=/Admin/Edit/" + model.Id
+            + ">Ред.</a> <a class='btn btn-primary btn-xs' role='button' href=/Admin/Details/" + model.Id + ">Подр.</a>"
+            + " <a class='btn btn-primary btn-xs' role='button' href=/Admin/Delete/" + model.Id + ">Удал.</a>"
+            )
+            .Encoded(false).Titled("Действия");
+
+    })
+    .Empty("Нет данных")
+    .Filterable()
+    .Sortable()
+    .Pageable()
+)
+
+@{
+    ViewBag.Title = "Index";
+}

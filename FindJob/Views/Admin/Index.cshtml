@@ -1,0 +1,9 @@
+﻿@model IEnumerable<FindJob.Models.User>
+
+@{
+    ViewBag.Title = "Список пользователей";
+}
+
+<h2>Список пользователей</h2>
+
+@Html.Partial("PartialUsers", Model.AsQueryable())
