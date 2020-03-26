@@ -3,10 +3,10 @@
 ###### Информационная система для работы кадрового агенства.
 
 Учетные записи (логин : пароль):
-admin1@rigmad.ru : admin1  (Администратор)
-jobseeker1@rigmad.ru : jobseeker1  (Соискатель)
-jobseeker2@rigmad.ru : jobseeker2  (Соискатель)
-employee1@rigmad.ru : employee1  (Работодатель)
+admin1@rigmad.ru : admin1  (Администратор)  
+jobseeker1@rigmad.ru : jobseeker1  (Соискатель)  
+jobseeker2@rigmad.ru : jobseeker2  (Соискатель)  
+employee1@rigmad.ru : employee1  (Работодатель)  
 
 Для создания этих учетных записей есть SQL скрипт CreateUsers.sql
 
