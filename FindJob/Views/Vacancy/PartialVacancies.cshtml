@@ -21,6 +21,7 @@
             columns.Add(model => "<a class='btn btn-primary btn-xs' role='button' href=/Vacancy/Edit/" + model.Id
             + ">Ред.</a> <a class='btn btn-primary btn-xs' role='button' href=/Vacancy/Details/" + model.Id + ">Подр.</a>"
             + " <a class='btn btn-primary btn-xs' role='button' href=/Vacancy/Delete/" + model.Id + ">Удал.</a>"
+            + " <a class='btn btn-primary btn-xs' role='button' href=/Resume/SearchForVacancy/" + model.Id + ">Поиск</a>"
             )
             .Encoded(false).Titled("Действия");
         }

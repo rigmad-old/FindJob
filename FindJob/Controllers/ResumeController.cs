@@ -50,7 +50,7 @@ namespace FindJob.Controllers
                 return View(resumes);
             }
         }
-        [Authorize(Roles = "Jobseeker")]
+        [Authorize(Roles = "Employee")]
         public ActionResult SearchForVacancy(int id)
         {
             using (ISession session = NHibernateHelper.OpenSession())
